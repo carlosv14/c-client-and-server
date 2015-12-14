@@ -18,7 +18,7 @@ int main(int argc , char *argv[])
     int sock;
     struct sockaddr_in server;
     char message[1000] , server_reply[2000];
-    string complete_message,client_username, client_email,client_name,Profilepic,id;
+    string complete_message,client_username, client_email,client_name,profilepic,id;
 
     //Create socket
     sock = socket(AF_INET , SOCK_STREAM , 0);
@@ -55,17 +55,16 @@ int main(int argc , char *argv[])
         cout<<"Enter Name:"<<endl;
         getline(cin,client_name);
         cout<<"Enter Username: "<<endl;
-        cin>>client_username;
-        while(true){
+        getline(cin,client_username);
         cout<<"Enter E-mail:"<<endl;
         cin>>client_email;
-        if(Validations::verifyEmail(client_email));
-            break;
-        };
+        cout<<"Enter ID:"<<endl;
+        cin>>id;
+        cout<<"Enter Profile Picture:"<<endl;
+        cin>>profilepic;
 
-
-
-        complete_message  = "name:"+client_name + ",username:" + client_username + ",email:"+ client_email;
+        complete_message  = "1,name:"+client_name + ",username:" + client_username + ",email:"+ client_email
+        +",ID:"+id + ",Profile Pic:" + profilepic;
         strcpy(message,complete_message.c_str());
         if( send(sock , message , strlen(message) , 0) < 0)
         {
@@ -80,12 +79,61 @@ int main(int argc , char *argv[])
             break;
         }
          puts(server_reply);
+         option=-1;
        /* complete_message  = "username:";
         puts(server_reply);
         scanf("%s" , in);
         complete_message+=in;
         strcpy(message,complete_message.c_str());*/
 
+    }else if(option ==2){
+        string searchuser;
+        cout<<"Enter Username: "<<endl;
+         cin>>searchuser;
+         string tosend = "2,username:" + client_username+",";
+        strcpy(message,tosend.c_str());
+           if( send(sock , message , strlen(message) , 0) < 0)
+        {
+            puts("Send failed");
+            return 1;
+        }
+           if( recv(sock , server_reply , 2000 , 0) < 0)
+        {
+            puts("recv failed");
+            break;
+        }
+        char * pch = strtok(server_reply,",");
+        while(pch!=NULL){
+        cout<<pch<<endl;
+        pch = strtok(NULL,",");
+        }
+         option=-1;
+    }else if(option ==3){
+        string searchuser;
+        cout<<"Enter Username: "<<endl;
+         cin>>searchuser;
+         string tosend = "3,username:" + client_username+",";
+        strcpy(message,tosend.c_str());
+           if( send(sock , message , strlen(message) , 0) < 0)
+        {
+            puts("Send failed");
+            return 1;
+        }
+           if( recv(sock , server_reply , 2000 , 0) < 0)
+        {
+            puts("recv failed");
+            break;
+        }
+        puts(server_reply);
+         option=-1;
+    }else if(option ==4){
+        strcpy(message,"4,");
+      if( send(sock , message , strlen(message) , 0) < 0)
+        {
+            puts("Send failed");
+            return 1;
+        }
+       exit(0);
     }
 }
     close(sock);

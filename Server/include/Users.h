@@ -6,10 +6,10 @@ using namespace std;
 
 class Users
 {
-    string name, email, username, profilepic, id,bd;
-    public:
 
-        Users(string name,string username,string profilepic,string id, string bd);
+    public:
+        string name, email, username, profilepic, id,bd;
+        Users();
         virtual ~Users();
     protected:
     private:

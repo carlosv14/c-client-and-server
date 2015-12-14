@@ -1,4 +1,5 @@
-#include<stdio.h>#include<string.h>    //strlen
+#include<stdio.h>
+#include<string.h>    //strlen
 #include<sys/socket.h>
 #include<arpa/inet.h> //inet_addr
 #include<unistd.h>
@@ -9,6 +10,7 @@
 #include <Users.h>
 #include <list>
 #include <string>
+#include <fstream>
 
  //\//
  using namespace std;
@@ -18,17 +20,16 @@
   free(*pointer);
   *pointer = NULL;
 }
-list<Users> * users = new list<Users>;
+Users arr [20];
 int main(int argc , char *argv[])
 {
+    int cant_users=0;
     int option =-1;
     int socket_desc , client_sock , c , read_size;
     struct sockaddr_in server , client;
     char client_message[2000];
     char server_message[2000];
-    char client_username[100];
-    char client_email[100];
-    char client_name[100];
+    string complete_message;
 
     //Create socket
     socket_desc = socket(AF_INET , SOCK_STREAM , 0);
@@ -71,17 +72,71 @@ int main(int argc , char *argv[])
     while( (read_size = recv(client_sock , client_message , 2000 , 0)) > 0 )
     {
 
-       strcpy(server_message,"User Succesfully Added!");
-       write(client_sock , server_message , strlen(server_message));
-          char * pch;
-          pch = strtok (client_message,",");
-          while (pch != NULL)
-          {
-            printf ("%s\n",pch);
-            pch = strtok (NULL, ",");
-          }
 
+        option = atoi(strtok (client_message,","));
+        if(option == 1){
+        arr[cant_users].name=strtok (NULL, ",");
+        arr[cant_users].username = strtok (NULL, ",");
+        arr[cant_users].email = strtok (NULL, ",");
+        arr[cant_users].id = strtok (NULL, ",");
+        arr[cant_users].profilepic = strtok (NULL, ",");
+        if(cant_users<20)
+        cant_users++;
+        strcpy(server_message,"User Succesfully Added!");
+        write(client_sock , server_message , strlen(server_message));
+        option=0;
+        }else if(option ==2 ){
+        bool found = false;
+        string username = strtok(NULL,",");
+        cout<<"this username: "<<username<<endl;
+        for(int i = 0; i<cant_users;i++){
+            if(username == arr[i].username){
+                found = true;
+                complete_message = arr[i].username + "," + arr[i].name +","+arr[i].email + "," + arr[i].profilepic;
+                break;
+            }
+        }
+        if(!found){
+        strcpy(server_message,"User Not Found!        ");
+        }else{
+        strcpy(server_message,complete_message.c_str());
+        }
+        write(client_sock , server_message , strlen(server_message));
+        option = 0;
+        }else if(option ==3 ){
+        bool found = false;
+        string username = strtok(NULL,",");
+        cout<<"this username: "<<username<<endl;
+        for(int i = 0; i<cant_users;i++){
+            if(username == arr[i].username){
+                found = true;
+                arr[i].name="";
+                arr[i].username = "";
+                arr[i].email = "";
+                arr[i].id = "";
+                arr[i].profilepic = "";
+                complete_message = "Successfully deleted ";
+                break;
+            }
+        }
+        if(!found){
+        strcpy(server_message,"User Not Found!        ");
+        }else{
+        strcpy(server_message,complete_message.c_str());
+        }
+        write(client_sock , server_message , strlen(server_message));
+        option = 0;
+        }else if(option ==4 ){
+        ofstream usersfile;
+        usersfile.open ("users.txt",ios::ate);
+        if(usersfile.is_open()) {
+           for(int i = 0; i<20;i++){
+                usersfile<<"{"+  arr[i].name +"," + arr[i].username + "," + arr[i].email + "," + arr[i].profilepic + ","+ arr[i].id + "}"<<"\n";
+            }
+            usersfile.close();
+        }
 
+    }
     }
 
     if(read_size == 0)

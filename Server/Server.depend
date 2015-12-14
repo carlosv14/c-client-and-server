@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1450056563 source:/home/cvarela/Desktop/Client-Server/Server/main.cpp
+1450073529 source:/home/cvarela/Desktop/Client-Server/Server/main.cpp
 	<stdio.h>
+	<string.h>
 	<sys/socket.h>
 	<arpa/inet.h>
 	<unistd.h>
@@ -11,10 +12,11 @@
 	<Users.h>
 	<list>
 	<string>
+	<fstream>
 
-1449971339 source:/home/cvarela/Desktop/Client-Server/Server/src/Users.cpp
+1450062386 source:/home/cvarela/Desktop/Client-Server/Server/src/Users.cpp
 	"Users.h"
 
-1449971339 /home/cvarela/Desktop/Client-Server/Server/include/Users.h
+1450062386 /home/cvarela/Desktop/Client-Server/Server/include/Users.h
 	<iostream>
 

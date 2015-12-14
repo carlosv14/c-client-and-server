@@ -1,12 +1,12 @@
 #include "Users.h"
 
-Users::Users(string name,string username,string profilepic,string id, string bd)
+Users::Users()
 {
-    this->name = name;
-    this->username = username;
-    this->profilepic = profilepic;
-    this->id   = id;
-    this->bd = bd;
+    this->name = "";
+    this->username = "";
+    this->profilepic = "";
+    this->id   = "";
+    this->bd = "";
 }
 
 Users::~Users()
