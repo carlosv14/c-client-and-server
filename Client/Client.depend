@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1450059472 source:/home/cvarela/Desktop/Client-Server/Client/main.cpp
+	<stdio.h>
+	<string.h>
+	<sys/socket.h>
+	<arpa/inet.h>
+	<unistd.h>
+	<iostream>
+	<cstring>
+	<cstdlib>
+	<regex>
+	"Validations.h"
+
+1450059472 source:/home/cvarela/Desktop/Client-Server/Client/src/Validations.cpp
+	"Validations.h"
+
+1450059099 /home/cvarela/Desktop/Client-Server/Client/include/Validations.h
+	<iostream>
+	<string>
+	<regex>
+

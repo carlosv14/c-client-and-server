@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1450056563 source:/home/cvarela/Desktop/Client-Server/Server/main.cpp
+	<stdio.h>
+	<sys/socket.h>
+	<arpa/inet.h>
+	<unistd.h>
+	<iostream>
+	<cstring>
+	<cstdlib>
+	<regex>
+	<Users.h>
+	<list>
+	<string>
+
+1449971339 source:/home/cvarela/Desktop/Client-Server/Server/src/Users.cpp
+	"Users.h"
+
+1449971339 /home/cvarela/Desktop/Client-Server/Server/include/Users.h
+	<iostream>
+
