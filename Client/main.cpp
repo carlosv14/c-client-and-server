@@ -6,10 +6,21 @@
 #include <iostream>
  #include <cstring>
 #include <cstdlib>
+#include <regex>
 #include "Validations.h"
 
 using namespace std;
 
+
+
+ bool validCedula(string id) {
+    if( std::regex_match (id, std::regex("\\d{4}-\\d{4}-\\d{5}")))
+        return true;
+}
+
+bool verifyEmail(string email) {
+   return regex_match(email,std::regex("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}"));
+}
 
 int main(int argc , char *argv[])
 {
@@ -90,7 +101,7 @@ int main(int argc , char *argv[])
         string searchuser;
         cout<<"Enter Username: "<<endl;
          cin>>searchuser;
-         string tosend = "2,username:" + client_username+",";
+         string tosend = "2,username:" + searchuser+",";
         strcpy(message,tosend.c_str());
            if( send(sock , message , strlen(message) , 0) < 0)
         {
@@ -112,7 +123,7 @@ int main(int argc , char *argv[])
         string searchuser;
         cout<<"Enter Username: "<<endl;
          cin>>searchuser;
-         string tosend = "3,username:" + client_username+",";
+         string tosend = "3,username:" + searchuser+",";
         strcpy(message,tosend.c_str());
            if( send(sock , message , strlen(message) , 0) < 0)
         {
