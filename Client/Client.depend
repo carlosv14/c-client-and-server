@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1450145504 source:/home/cvarela/Desktop/Client-Server/Client/main.cpp
+1450312489 source:/home/cvarela/Desktop/Client-Server/Client/main.cpp
 	<stdio.h>
 	<string.h>
 	<sys/socket.h>
@@ -8,7 +8,7 @@
 	<iostream>
 	<cstring>
 	<cstdlib>
-	"Validations.h"
+	<regex>
 
 1450059472 source:/home/cvarela/Desktop/Client-Server/Client/src/Validations.cpp
 	"Validations.h"
